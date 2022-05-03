@@ -12,7 +12,7 @@
         編集
     </div>
     <div class="card-body">
-        {{ Form::open(['route' =>  ['articles.update', $formData->article->id], 'method' => 'post']) }}
+        {{ Form::open(['route' =>  ['admin.articles.update', $formData->article->id], 'method' => 'post']) }}
             @csrf
             @method('PUT')
             {{ Form::adminFormText(

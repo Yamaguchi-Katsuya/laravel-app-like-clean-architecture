@@ -9,7 +9,7 @@
 
     <div class="card-body">
 
-        {{ Form::open(['route' =>  ['tags.store'], 'method' => 'post']) }}
+        {{ Form::open(['route' =>  ['admin.tags.store'], 'method' => 'post']) }}
             @csrf
             {{ Form::adminFormText(
                 'name',

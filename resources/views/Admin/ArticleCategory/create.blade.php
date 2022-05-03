@@ -3,7 +3,7 @@
 <h1>新規作成画面</h1>
 <p><a href="{{ route('admin.article-categories.index')}}">一覧画面</a></p>
 
-{{ Form::open(['route' =>  ['article-categories.store'], 'method' => 'post']) }}
+{{ Form::open(['route' =>  ['admin.article-categories.store'], 'method' => 'post']) }}
     @csrf
     {{ Form::adminFormText(
         'name',
