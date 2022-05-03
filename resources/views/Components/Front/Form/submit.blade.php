@@ -1,0 +1,4 @@
+{{Form::submit(
+    $text,
+    $attributes
+)}}
