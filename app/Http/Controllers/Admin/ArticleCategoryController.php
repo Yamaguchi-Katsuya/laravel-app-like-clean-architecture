@@ -20,7 +20,7 @@ class ArticleCategoryController extends Controller
     public function index()
     {
         $articleCategories = ArticleCategory::all();
-        return view('admin.ArticleCategory.index', compact('articleCategories'));
+        return view('admin.articleCategory.index', compact('articleCategories'));
     }
 
     /**
@@ -30,7 +30,7 @@ class ArticleCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.ArticleCategory.create');
+        return view('admin.articleCategory.create');
     }
 
     /**
@@ -38,16 +38,14 @@ class ArticleCategoryController extends Controller
      *
      * @param StoreRequest $request
      * @param StoreAction $storeAction
-     * @param IndexAction $indexAction
      * @return Response
      */
-    public function store(StoreRequest $request, StoreAction $storeAction, IndexAction $indexAction)
+    public function store(StoreRequest $request, StoreAction $storeAction)
     {
         $articleCategory = $request->makeArticleCategory();
         try {
             $storeAction->invoke($articleCategory);
-            $articleCategories = $indexAction->invoke();
-            return view('admin.ArticleCategory.index', compact('articleCategories'));
+            return redirect()->route('admin.article-categories.index');
         } catch (Exception $e) {
             return false;
         }

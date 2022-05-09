@@ -27,7 +27,7 @@ class TagController extends Controller
     public function index(IndexAction $action): View|Factory
     {
         $tags = $action->invoke();
-        return view('admin.Tag.index', compact('tags'));
+        return view('admin.tag.index', compact('tags'));
     }
 
     /**
@@ -37,7 +37,7 @@ class TagController extends Controller
      */
     public function create(): View|Factory
     {
-        return view('admin.Tag.create');
+        return view('admin.tag.create');
     }
 
     /**
@@ -52,7 +52,7 @@ class TagController extends Controller
         $tag = $request->makeTag();
         try {
             $action->invoke($tag);
-            return redirect()->route('tag.index');
+            return redirect()->route('admin.tags.index');
         } catch (Exception $e) {
             echo $e->getMessage();
             return false;
@@ -69,7 +69,7 @@ class TagController extends Controller
     public function show(ShowAction $action, int $id): View|Factory
     {
         $tag = $action->invoke($id);
-        return view('admin.Tag.show', compact('tag'));
+        return view('admin.tag.show', compact('tag'));
     }
 
     /**
@@ -82,7 +82,7 @@ class TagController extends Controller
     public function edit(EditAction $action, int $id): View|Factory
     {
         $formData = $action->invoke($id);
-        return view('admin.Tag.edit', compact('formData'));
+        return view('admin.tag.edit', compact('formData'));
     }
 
     /**
@@ -98,7 +98,7 @@ class TagController extends Controller
         $article = $request->makeArticle($id);
         try {
             $action->invoke($article);
-            return redirect()->route('tag.show', $id);
+            return redirect()->route('admin.tags.show', $id);
         } catch (Exception $e) {
             return false;
         }
@@ -115,7 +115,7 @@ class TagController extends Controller
     {
         try {
             $action->invoke($id);
-            return redirect()->route('tag.index');
+            return redirect()->route('admin.tags.index');
         } catch (Exception $e) {
             return false;
         }

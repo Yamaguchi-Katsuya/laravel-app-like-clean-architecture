@@ -29,7 +29,7 @@ class ArticleController extends Controller
     public function index(IndexAction $action): View|Factory
     {
         $articles = $action->invoke();
-        return view('admin.Article.index', compact('articles'));
+        return view('admin.article.index', compact('articles'));
     }
 
     /**
@@ -41,7 +41,7 @@ class ArticleController extends Controller
     public function create(CreateAction $action): View|Factory
     {
         $formData = $action->invoke();
-        return view('admin.Article.create', compact('formData'));
+        return view('admin.article.create', compact('formData'));
     }
 
     /**
@@ -55,8 +55,8 @@ class ArticleController extends Controller
     {
         $article = $request->makeArticle();
         try {
-            $action->invoke($article, $request->tags);
-            return redirect()->route('article.index');
+            $action->invoke($article, $request);
+            return redirect()->route('admin.articles.index');
         } catch (Exception $e) {
             return false;
         }
@@ -72,7 +72,7 @@ class ArticleController extends Controller
     public function show(ShowAction $action, int $id): View|Factory
     {
         $article = $action->invoke($id);
-        return view('admin.Article.show', compact('article'));
+        return view('admin.article.show', compact('article'));
     }
 
     /**
@@ -85,7 +85,7 @@ class ArticleController extends Controller
     public function edit(EditAction $action, int $id): View|Factory
     {
         $formData = $action->invoke($id);
-        return view('admin.Article.edit', compact('formData'));
+        return view('admin.article.edit', compact('formData'));
     }
 
     /**
@@ -101,7 +101,7 @@ class ArticleController extends Controller
         $article = $request->makeArticle($id);
         try {
             $action->invoke($article);
-            return redirect()->route('article.show', $id);
+            return redirect()->route('admin.articles.show', $id);
         } catch (Exception $e) {
             return false;
         }
@@ -118,7 +118,7 @@ class ArticleController extends Controller
     {
         try {
             $action->invoke($id);
-            return redirect()->route('article.index');
+            return redirect()->route('admin.articles.index');
         } catch (Exception $e) {
             return false;
         }
