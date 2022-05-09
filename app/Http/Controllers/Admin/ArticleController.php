@@ -16,7 +16,7 @@ use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ArticleController extends Controller
 {
@@ -54,12 +54,15 @@ class ArticleController extends Controller
     public function store(StoreRequest $request, StoreAction $action): RedirectResponse|false
     {
         $article = $request->makeArticle();
-        try {
-            $action->invoke($article, $request);
+        $result = $action->invoke($article, $request);
+        if ($result) {
+            Session::flash('success', 'Created successfully!!');
             return redirect()->route('admin.articles.index');
-        } catch (Exception $e) {
-            return false;
+        } else {
+            Session::flash('error', 'Failed to Create...');
+            return back()->withInput();
         }
+
     }
 
     /**

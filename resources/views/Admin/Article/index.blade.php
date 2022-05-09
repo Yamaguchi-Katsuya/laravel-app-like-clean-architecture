@@ -4,12 +4,13 @@
 <p><a href="{{ route('admin.articles.create') }}">新規追加</a></p>
 
 @if ($message = Session::get('success'))
-<p>{{ $message }}</p>
+    <p>{{ $message }}</p>
 @endif
 
 <div class="mt-5">
     <table class="table">
         <tr>
+            <th>ID</th>
             <th>タイトル</th>
             <th>カテゴリー</th>
             <th>タグ</th>
@@ -21,6 +22,7 @@
         </tr>
         @foreach ($articles as $article)
         <tr>
+            <td>{{ $article->id }}</td>
             <td>{{ $article->title }}</td>
             <td>{{ $article->articleCategory->name }}</td>
             <td>
