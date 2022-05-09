@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('body');
+            $table->string('main_image');
             $table->tinyInteger('status');
             $table->dateTime('published_at');
             $table->timestamps();

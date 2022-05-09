@@ -3,6 +3,10 @@
 <h1>新規作成画面</h1>
 <p><a href="{{ route('admin.articles.index')}}">一覧画面</a></p>
 
+@if ($message = Session::get('error'))
+    <p>{{ $message }}</p>
+@endif
+
 <div class="card mt-5">
     <div class="card-header">
         新規作成
@@ -50,6 +54,15 @@
                 'タグ',
                 $formData->masterItems->tags,
                 old('tags'),
+            ) }}
+
+            {{ Form::adminFormFile(
+                'main_image',
+                'メイン画像',
+                [
+                    'id' => 'main_image',
+                    'required' => 'required'
+                ]
             ) }}
 
             {{ Form::adminFormSelect(

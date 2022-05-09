@@ -198,6 +198,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
+        App\Providers\ServicesServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
 
@@ -217,6 +218,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'AdminFileHelper' =>  App\Helpers\Admin\FileHelper::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

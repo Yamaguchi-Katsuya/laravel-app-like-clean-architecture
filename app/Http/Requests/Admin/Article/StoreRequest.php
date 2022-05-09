@@ -9,13 +9,6 @@ use Illuminate\Validation\Rules\Enum;
 
 class StoreRequest extends FormRequest
 {
-    // public function authorize(Gate $gate): bool
-    // {
-    //     // 認可処理もここで行うことができる
-    //     $community = $this->route()->parameter('community');
-    //     return $gate->authorize('store', [Post::class, $community]);
-    // }
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -47,6 +40,11 @@ class StoreRequest extends FormRequest
                 'integer',
                 'exists:article_categories,id'
             ],
+            'main_image' => [
+                'required',
+                'image',
+                'mimes:jpg,jpeg,png,gif'
+            ],
             'status' => [
                 'required',
                 'integer',
@@ -67,6 +65,7 @@ class StoreRequest extends FormRequest
             'title' => 'タイトル',
             'body' => '本文',
             'article_category_id' => 'カテゴリー',
+            'main_image' => 'メイン画像',
             'status' => 'ステータス',
             'published_at' => '公開日時',
         ];
@@ -77,6 +76,8 @@ class StoreRequest extends FormRequest
      */
     public function makeArticle(): Article
     {
-        return new Article($this->validated());
+        $article = new Article($this->validated());
+        $article->main_image = $this->main_image->getClientOriginalName();
+        return $article;
     }
 }

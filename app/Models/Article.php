@@ -16,6 +16,7 @@ class Article extends Model
         'title',
         'body',
         'article_category_id',
+        'main_image',
         'status',
         'published_at',
     ];
