@@ -1,5 +1,18 @@
 <?php
 
+use App\Constants\FilePathFormats;
+use App\Helpers\Admin\FileHelper;
+use App\Providers\AdminLoginServiceProvider;
+use App\Providers\AppServiceProvider;
+use App\Providers\AuthServiceProvider;
+use App\Providers\EventServiceProvider;
+use App\Providers\FormMacroServiceProvider;
+use App\Providers\FortifyServiceProvider;
+use App\Providers\RepositoryServiceProvider;
+use App\Providers\RouteServiceProvider;
+use App\Providers\ServicesServiceProvider;
+use Collective\Html\FormFacade;
+use Collective\Html\HtmlFacade;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -181,7 +194,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
         /*
          * Package Service Providers...
          */
@@ -189,16 +201,16 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AdminLoginServiceProvider::class,
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\FormMacroServiceProvider::class,
-        App\Providers\FortifyServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        App\Providers\RepositoryServiceProvider::class,
-        App\Providers\ServicesServiceProvider::class,
+        AdminLoginServiceProvider::class,
+        AppServiceProvider::class,
+        AuthServiceProvider::class,
+        EventServiceProvider::class,
+        FormMacroServiceProvider::class,
+        FortifyServiceProvider::class,
+        RouteServiceProvider::class,
+        RepositoryServiceProvider::class,
+        ServicesServiceProvider::class,
+        RepositoryServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
 
@@ -216,12 +228,11 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class,
-        'AdminFileHelper' =>  App\Helpers\Admin\FileHelper::class,
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'FilePathFormats' => FilePathFormats::class,
+        'AdminFileHelper' =>  FileHelper::class,
+        'Form' => FormFacade::class,
+        'Html' => HtmlFacade::class,
     ])->toArray(),
 
     'DB' => Illuminate\Support\Facades\DB::class,
-
 ];
