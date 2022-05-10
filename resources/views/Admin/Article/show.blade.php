@@ -17,7 +17,11 @@
         <tr>
             <td>{{ $article->id }}</td>
             <td class="w-25">
-                <img class="img-fluid img-thumbnail" src="{{ AdminFileHelper::getURL("static/article/{$article->id}/{$article->main_image}") }}" alt="">
+                <img
+                    class="img-fluid img-thumbnail"
+                    src="{{ AdminFileHelper::getURL(sprintf(FilePathFormats::ARTICLE_IMG_PATH, $article->id, $article->main_image)) }}"
+                    alt=""
+                >
             </td>
             <td>{{ $article->title }}</td>
             <td>{{ $article->articleCategory->name }}</td>
