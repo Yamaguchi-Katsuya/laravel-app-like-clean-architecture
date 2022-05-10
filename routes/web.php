@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin;
-use App\Http\Controllers\Front\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return redirect(route('login'));
+});
+
+Route::get('/phpinfo', function () {
+    phpinfo();
+});
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::middleware('basicauth')->group(function () {
         Route::get('login', [Admin\LoginController::class, 'create'])->name('login');
@@ -29,14 +36,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     });
 });
 
-Route::middleware(['auth:web', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::get('/phpinfo', function () {
-    phpinfo();
-});
-
 Route::group(['middleware' => ['auth:web', 'verified']], function () {
     Route::view('/profile/edit', 'Front.profile.edit')->name('profile.edit');
     Route::get('logout', function () {
@@ -44,10 +43,3 @@ Route::group(['middleware' => ['auth:web', 'verified']], function () {
         return redirect('register');
     });
 });
-
-// Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
-//         Route::get('register', [AuthController::class, 'register'])->name('register');
-//         Route::post('register', [AuthController::class, 'createUser'])->name('register');
-//         Route::get('login', [AuthController::class, 'login'])->name('login');
-//         Route::post('login', [AuthController::class, 'loginPost'])->name('login');
-// });
